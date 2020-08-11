@@ -1,0 +1,41 @@
+.shop-view{
+    display: flex;
+    border: 1px solid lightgray;
+    margin-top: 15%;
+    padding: 5px;  
+    border-radius: 5px;
+    width: 350px;
+    height: 200px;
+    margin-left: 50px;
+   
+}
+
+
+
+.shop-name{
+    color: blue;
+    font-weight: 200;
+
+}
+
+.shop-view img{
+    width: 130px;
+    height: 130px;
+    text-align: center;
+    padding:5px;
+}
+
+.info{
+    margin-left: 20px;
+    padding:5px;
+}
+
+.buttons{
+    display: flex;
+    padding: 5px;
+    
+}
+
+.buttons button{
+    margin-right: 2px;
+}

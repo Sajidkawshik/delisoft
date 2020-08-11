@@ -3,8 +3,13 @@ import { useState } from 'react';
 import Select from 'react-select';
 import './Routes.css';
 import { Button } from 'react-bootstrap';
+import shopList from "../../fakeData/shops";
+import { useEffect } from 'react';
+import ShopView from './ShopView';
+import ShopForm from '../Forms/ShopForm';
 const Routes = () => {
 
+    /*---sample data---*/
     const zones = [
 
         { label: "dhanmondi", value: 1 },
@@ -20,37 +25,77 @@ const Routes = () => {
         mirpur: ["1", "2", "10"]
 
     }
+    /*---sample data---*/
 
-    const [state, setState] = useState();
+    const [shops, setShops] = useState();
     const [firstOption, setFirstOption] = useState([]);
     const [secondOption, setSecondOption] = useState([]);
-    const [dropdown, setDrop] = useState();
+    const [selectedSecondOption, setSelectedSecondOption] = useState();
+    const [zone, setZone] = useState();
+    const [route, setRoute] = useState();
+    const [shownShops, setShownShops] = useState([]);
+
 
 
     const changeOption = (opt) => {
-        setState(opt.label);
-        setDrop("");
+        //setState(opt.label);
+        setSelectedSecondOption("");
         setFirstOption(opt);
         changeSecondOption(opt.label);
     }
 
     const selectSecondOption = (opt) => {
-        setDrop(opt);
+        setSelectedSecondOption(opt);
     }
 
 
     const changeSecondOption = (opt) => {
         let secondOption = routeArray[opt].map(opt => ({ label: opt, value: opt }));
-        console.log(secondOption);
         setSecondOption(secondOption);
 
     }
 
+    useEffect(() => {
+        setShops(shopList);
+        //setShownShops();
+    }, [])
 
 
+    const filterShop = (zone, route) => {
+
+
+        if (zone != null && route == null) {
+            let shownListZone = shops.filter(shop => shop.zone.toUpperCase() === zone.toUpperCase());
+            setShownShops(shownListZone);
+
+        }
+        else if (route != null && zone != null) {
+            let shownListZone = shops.filter(shop => shop.zone.toUpperCase() === zone.toUpperCase());
+            let shownList = shownListZone.filter(user => user.route.toUpperCase() === route.toUpperCase());
+            setShownShops(shownList);
+
+        }
+
+    }
+
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     return (
         <div className="container" >
+
+            <ShopForm open={open}
+                      handleClickOpen={handleClickOpen}
+                      handleClose={handleClose}
+            ></ShopForm>
+
             <div className="filter-section">
                 <div>
                     <Select id="filter1" options={zones}
@@ -60,13 +105,41 @@ const Routes = () => {
                 <div>
                     <Select id="filter2"
                         options={secondOption}
-                        value={dropdown}
+                        value={selectedSecondOption}
                         onChange={(opt) => selectSecondOption(opt)}
                     />
                 </div>
 
-                <Button id="button" variant="success" onClick={() => console.log(firstOption.label, dropdown.label)}>Filter</Button>
+                {
+                    (firstOption.label != null) ?
+                        <Button id="button-route-filter" variant="success" onClick={() => filterShop(firstOption.label, selectedSecondOption.label)}>Filter</Button>
+                        :
+                        <Button id="button-route-filter" variant="success" disabled="true">Filter</Button>
+
+                }
+
+                <div id="addShop">
+                    <Button variant="success" color="primary" onClick={()=>setOpen(true)}>Add new shop</Button>
+                </div>
+
             </div>
+
+           
+            
+            
+            <div className="row shopPanel">
+
+                {
+                    shownShops.map(shops => <ShopView
+                        shops={shops}
+                    ></ShopView>)
+                }
+
+
+
+            </div>
+
+
         </div>
     );
 
