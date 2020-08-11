@@ -1,0 +1,18 @@
+.filter-section{
+    display: flex;
+    margin-left:5%;
+    font-size: larger;
+    padding-left: 40px;
+}
+
+.filter{
+    margin-right: 3%;
+}
+
+.dropDown{
+    padding-left: 10%;
+}
+
+.userPanel{
+    margin-left: 5%;
+}
