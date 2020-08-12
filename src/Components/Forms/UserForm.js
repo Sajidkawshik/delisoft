@@ -16,50 +16,33 @@ const ShopForm = (props) => {
     const [secondOption, setSecondOption] = useState([]);
     const [selectedSecondOption, setSelectedSecondOption] = useState();
 
-    const zones = [
+    const roles = [
 
-        { label: "dhanmondi", value: 1 },
-        { label: "shahbag", value: 2 },
-        { label: "mirpur", value: 3 },
+        { label: "Admin", value: 1 },
+        { label: "SR", value: 2 },
+        { label: "DSR", value: 3 },
 
     ];
 
-    const routeArray = {
-        one: [""],
-        dhanmondi: ["1", "2", "3", "6/a", "7/a"],
-        shahbag: ["ramna", "du", "poribag", "sheraton"],
-        mirpur: ["1", "2", "10"]
+    const zones = [
 
-    }
+        { label: "Dhanmondi", value: 1 },
+        { label: "Shahbag", value: 2 },
+        { label: "Mirpur", value: 3 },
 
-    const changeOption = (opt) => {
-        //setState(opt.label);
-        setSelectedSecondOption("");
-        setFirstOption(opt);
-        changeSecondOption(opt.label);
-    }
+    ];
 
-    const selectSecondOption = (opt) => {
-        setSelectedSecondOption(opt);
-    }
-
-
-    const changeSecondOption = (opt) => {
-        let secondOption = routeArray[opt].map(opt => ({ label: opt, value: opt }));
-        setSecondOption(secondOption);
-
-    }
 
     return (
         <div>
             <Dialog open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">New Shop Entry</DialogTitle>
+                <DialogTitle id="form-dialog-title">New User Entry</DialogTitle>
                 <DialogContent className="form-dialogue">
                     <TextField
                         autoFocus
                         margin="dense"
                         id="name"
-                        label="Shop name"
+                        label="Username"
                         type="email"
                         fullWidth
                     />
@@ -83,17 +66,16 @@ const ShopForm = (props) => {
 
                     <div className="formDropDown">
                         <div>
-                            <Select id="filter1" options={zones} maxMenuHeight={150}
-                                onChange={(opt) => changeOption(opt)} placeholder="Select Zone"/>
+                            <Select id="filter1"
+                                options={roles}
+                                placeholder="Select Role"
+                            />
                         </div>
 
                         <div>
                             <Select id="filter2"
-                                options={secondOption}
-                                maxMenuHeight={150}
-                                value={selectedSecondOption}
-                                onChange={(opt) => selectSecondOption(opt)}
-                                placeholder="Select Route"
+                                options={zones}
+                                placeholder="Select Zone"
                             />
                         </div>
                     </div>
@@ -105,7 +87,7 @@ const ShopForm = (props) => {
                         Done
                     </Button>
                     <Button variant="primary" onClick={props.handleClose} color="primary" id="buttonCancel">
-                        Cancel 
+                        Cancel
                     </Button>
                 </DialogActions>
             </Dialog>

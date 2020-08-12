@@ -3,7 +3,9 @@ import './Users.css';
 import UserView from '../UserView/UserView';
 import usersList from "../../fakeData/users";
 import { Dropdown, ButtonGroup } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import UserForm from '../Forms/UserForm';
+
 const User = () => {
 
     const [users, setUsers] = useState([]);
@@ -52,13 +54,25 @@ const User = () => {
         
     }
 
+    const [open, setOpen] = useState(false);
 
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
 
 return (
     <div className="container">
 
         <div className="">
+            <UserForm open={open}
+                      handleClickOpen={handleClickOpen}
+                      handleClose={handleClose}
+            ></UserForm>
             <div className="filter-section">
                 <div className="filter">
                     <Dropdown>
@@ -90,6 +104,10 @@ return (
 
                 <div>
                     <Button variant="success" onClick={() => filter(role, zone)}>Filter</Button>
+                </div>
+
+                <div id="addUser">
+                    <Button variant="success" color="primary" onClick={()=>setOpen(true)}>Add new user</Button>
                 </div>
 
             </div>
