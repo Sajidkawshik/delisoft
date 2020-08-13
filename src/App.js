@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import Users from './Components/Users/Users';
 import Routes from './Components/Routes/Routes';
+import Product from './Components/Product/Product';
 
 
 function App() {
@@ -26,6 +27,11 @@ function App() {
           <Route path="/routes">
             <Routes></Routes>
           </Route>
+
+          <Route path="/product">
+              <Product></Product>
+          </Route>
+
         </Switch>
       </Router>
     </div>
