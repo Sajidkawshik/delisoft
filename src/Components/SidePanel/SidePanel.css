@@ -1,4 +1,9 @@
 .toolbar{
     color: #fff;
-    background-color: darkgrey;
+    background-color: rgb(240, 93, 49);
+    
+}
+
+.toolbar h6{
+    color: #fff;
 }

@@ -17,7 +17,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import './SidePanel.css';
-
+import PeopleIcon from '@material-ui/icons/People';
+import PlaceIcon from '@material-ui/icons/Place';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -71,12 +73,22 @@ function ResponsiveDrawer(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+       <ListItem button key="Users">
+         <ListItemIcon><PeopleIcon/></ListItemIcon>
+         <ListItemText primary="Users"/>
+       </ListItem>
+       
+       <ListItem button key="Routes">
+         <ListItemIcon><PlaceIcon/></ListItemIcon>
+         <ListItemText primary="Routes"/>
+       </ListItem>
+
+       <ListItem button key="Products">
+         <ListItemIcon><ShoppingBasketIcon/></ListItemIcon>
+         <ListItemText primary="Products"/>
+       </ListItem>
+       
+
       </List>
       <Divider />
       <List>
@@ -107,7 +119,7 @@ function ResponsiveDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Responsive drawer
+            DeliSoft
           </Typography>
         </Toolbar>
       </AppBar>

@@ -1,0 +1,18 @@
+.form-dialogue{
+    height:800px;
+}
+
+.formDropDown{
+    display: flex;
+    margin-top: 30px;
+    margin-left: -25px;
+}
+
+#buttonCancel{
+    margin-left: 15px;
+}
+
+#dlgAction{
+    margin-bottom: 10px;
+
+}
