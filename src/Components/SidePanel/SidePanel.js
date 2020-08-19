@@ -20,6 +20,9 @@ import './SidePanel.css';
 import PeopleIcon from '@material-ui/icons/People';
 import PlaceIcon from '@material-ui/icons/Place';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import { Link } from 'react-router-dom';
+import { Select } from 'antd';
+import { useState } from 'react';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -36,9 +39,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
-     
+
     },
-    
+
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -55,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
-  
+
 }));
 
 function ResponsiveDrawer(props) {
@@ -68,36 +71,53 @@ function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const [sel1, setSel1] = useState(false);
+  const [sel2, setSel2] = useState(false);
+  const [sel3, setSel3] = useState(false);
+
+
+
+  const selectedMenu = (option) => {
+    setSel1(false);
+    setSel2(false);
+    setSel3(false);
+    if (option === "sel1") setSel1(true);
+    else if (option === "sel2") setSel2(true);
+    else
+      setSel3(true);
+
+  }
+
   const drawer = (
     <div>
       <div className={classes.toolbar} />
       <Divider />
-      <List>
-       <ListItem button key="Users">
-         <ListItemIcon><PeopleIcon/></ListItemIcon>
-         <ListItemText primary="Users"/>
-       </ListItem>
-       
-       <ListItem button key="Routes">
-         <ListItemIcon><PlaceIcon/></ListItemIcon>
-         <ListItemText primary="Routes"/>
-       </ListItem>
+      <List id="menu">
+        <Link to="/users">
+          <ListItem className="btnn" button key="Users" selected={sel1} onClick={() => { selectedMenu("sel1") }}>
+            <ListItemIcon><PeopleIcon /></ListItemIcon>
+            <ListItemText primary="Users" />
+          </ListItem>
+        </Link>
 
-       <ListItem button key="Products">
-         <ListItemIcon><ShoppingBasketIcon/></ListItemIcon>
-         <ListItemText primary="Products"/>
-       </ListItem>
-       
+        <Link to="/routes">
+          <ListItem className="btnn" button key="Routes" selected={sel2} onClick={() => { selectedMenu("sel2") }}>
+            <ListItemIcon><PlaceIcon /></ListItemIcon>
+            <ListItemText primary="Routes" />
+          </ListItem>
+        </Link>
+
+        <Link to="/products">
+          <ListItem className="btnn" button key="Products" selected={sel3} onClick={() => { selectedMenu("sel3") }}>
+            <ListItemIcon><ShoppingBasketIcon /></ListItemIcon>
+            <ListItemText primary="Products" />
+          </ListItem>
+        </Link>
 
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+
       </List>
     </div>
   );
@@ -156,8 +176,8 @@ function ResponsiveDrawer(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        
-        
+
+
       </main>
     </div>
   );

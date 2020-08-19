@@ -16,9 +16,10 @@ import Product from './Components/Product/Product';
 function App() {
   return (
     <div >
-      <SidePanel></SidePanel>
+     
 
       <Router>
+      <SidePanel></SidePanel>
         <Switch>
           <Route path="/users">
             <Users></Users>
@@ -28,7 +29,7 @@ function App() {
             <Routes></Routes>
           </Route>
 
-          <Route path="/product">
+          <Route path="/products">
               <Product></Product>
           </Route>
 
